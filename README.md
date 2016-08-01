@@ -77,6 +77,29 @@ bool DeleteAllDocuments(){
 }
 ```
 
+### Async
+
+For all methods there is an async extension:
+
+```csharp
+public static Task<bool> InsertAsync<T>(this IEasyDocumentStorage eds, T document)
+
+public static Task<bool> InsertAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+
+public static Task<bool> InsertOrUpdateAsync<T>(this IEasyDocumentStorage eds, T document)
+
+public static Task<bool> InsertOrUpdateAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+
+public static Task<bool> DeleteAsync<T>(this IEasyDocumentStorage eds, T document)
+
+public static Task<bool> DeleteAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+
+public static Task<bool> ExistsAsync<T>(this IEasyDocumentStorage eds, string documentId)
+
+public static Task<T> GetByIdAsync<T>(this IEasyDocumentStorage eds, string documentId)
+
+public static Task<IEnumerable<T>> GetAsync<T>(this IEasyDocumentStorage eds, Func<T, bool> clause = null)
+```
 
 ### Cache
 Optionally you can use the provided cache to speed up the system a little bit:
