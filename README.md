@@ -26,6 +26,8 @@ PM> Install-Package EasyDocumentStorage.PCL
 
 ## Let' see some code!
 
+### Type registration
+
 Create a simple document class first:
 
 ```csharp
@@ -36,8 +38,8 @@ class MyDocument {
 }
 ```
 
-Somewhere in your code register the previously created MyDocument class. This is the only thing 
-needed as the EDS treats ids internally as string. This way you can use whatever you want as id, as 
+Somewhere in your code you need to register the previously created MyDocument class, this is the only configuration
+needed as EasyDocumentStorage treats ids internally as string. This way you can use whatever you want as id, as 
 long as you provide a converter that returns a string.
 
 ```csharp
@@ -46,7 +48,7 @@ void main(){
 }
 ```
 
-Then you can use it like this:
+### Usage
 
 ```csharp
 bool InsertNewDocument( int id, string name, string author ){
@@ -57,8 +59,21 @@ bool InsertNewDocument( int id, string name, string author ){
     });
 }
 
-void GetAllDocuments(){
+bool UpdateDocument( MyDocument document ){
+	return EasyDocumentStorage.Default.InsertOrUpdate(document);
+}
+
+IEnumerable<MyDocument> GetAllDocuments(){
 	return EasyDocumentStorage.Default.Get<MyDocument>();
+}
+
+IEnumerable<MyDocument> GetAllDocumentsFromAuthor( string author ){
+	return EasyDocumentStorage.Default.Get<MyDocument>( (doc) => doc.Author == author );
+}
+
+bool DeleteAllDocuments(){
+    var docs = GetAllDocuments();
+    return EasyDocumentStorage.Default.Delete(docs);
 }
 ```
 
