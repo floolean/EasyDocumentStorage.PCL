@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>EasyDocumentStorage.PCL</id>
+        <version>1.0.3</version>
+        <authors>floolean</authors>
+        <owners>floolean</owners>
+        <licenseUrl>https://github.com/floolean\EasyDocumentStorage.PCL/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/floolean/EasyDocumentStorage.PCL</projectUrl>
+        <iconUrl>https://github.com/floolean/EasyDocumentStorage.PCL/blob/master/Icon.png?raw=true</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>EasyDocumentStorage PCL provides a basic and easy to use cross platform document storage.</description>
+        <summary>An easy to use cross-platform .NET document storage engine.</summary>
+        <releaseNotes>Moved static utility extensions to internal to avoid conflicts.</releaseNotes>
+        <copyright>Copyright 2016</copyright>
+        <language>en-US</language>
+        <tags>document storage serialization database db dotnet simple easy portable pcl android ios xamarin monoandroid monodroid monotouch</tags>
+        <dependencies>
+            <dependency id="PCLCrypto" version="2.0.147" />
+            <dependency id="PCLStorage" version="1.0.2" />
+            <dependency id="Newtonsoft.Json" version="9.0.1" />
+            <dependency id="SharpSerializer.PCL" version="2.18.7" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\MonoAndroid23\EasyDocumentStorage.PCL.dll" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\MonoAndroid23\EasyDocumentStorage.PCL.xml" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\MonoTouch10\EasyDocumentStorage.PCL.dll" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\MonoTouch10\EasyDocumentStorage.PCL.xml" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\net45\EasyDocumentStorage.PCL.dll" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\net45\EasyDocumentStorage.PCL.xml" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\xamarinios10\EasyDocumentStorage.PCL.dll" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\xamarinios10\EasyDocumentStorage.PCL.xml" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\EasyDocumentStorage.PCL.dll" />
+        <file src="..\EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\EasyDocumentStorage.PCL.xml" />
+    </files>
+</package>

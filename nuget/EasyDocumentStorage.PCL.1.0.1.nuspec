@@ -23,10 +23,15 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="lib\MonoAndroid23\_._" target="lib\MonoAndroid23\_._" />
-        <file src="lib\MonoTouch10\_._" target="lib\MonoTouch10\_._" />
-        <file src="lib\net45\_._" target="lib\net45\_._" />
-        <file src="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\_._" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\_._" />
-        <file src="lib\xamarinios10\_._" target="lib\xamarinios10\_._" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\MonoAndroid23\EasyDocumentStorage.PCL.dll" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\MonoAndroid23\EasyDocumentStorage.PCL.xml" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\MonoTouch10\EasyDocumentStorage.PCL.dll" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\MonoTouch10\EasyDocumentStorage.PCL.xml" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\net45\EasyDocumentStorage.PCL.dll" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\net45\EasyDocumentStorage.PCL.xml" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\xamarinios10\EasyDocumentStorage.PCL.dll" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\xamarinios10\EasyDocumentStorage.PCL.xml" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.dll" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\EasyDocumentStorage.PCL.dll" />
+        <file src="EasyDocumentStorage.PCL\bin\Release\EasyDocumentStorage.PCL.xml" target="lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\EasyDocumentStorage.PCL.xml" />
     </files>
 </package>
