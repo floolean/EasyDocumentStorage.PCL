@@ -8,7 +8,7 @@ namespace EasyDocumentStorage
 	/// <summary>
 	/// Easy document storage async extensions.
 	/// </summary>
-	public static class EasyDocumentStorageExtensions
+	public static class EZDocumentStorageExtensions
 	{
 
 		/// <summary>
@@ -17,7 +17,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="document">Document.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> InsertAsync<T>(this IEasyDocumentStorage eds, T document)
+		public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, T document)
 		{
 			return Task.Run(() => eds.Insert(document));
 		}
@@ -28,7 +28,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> InsertAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+		public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 		{
 			return Task.Run(() => eds.Insert(documents));
 		}
@@ -39,7 +39,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="document">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> InsertOrUpdateAsync<T>(this IEasyDocumentStorage eds, T document)
+		public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, T document)
 		{
 			return Task.Run(() => eds.InsertOrUpdate(document));
 		}
@@ -50,7 +50,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> InsertOrUpdateAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+		public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 		{
 			return Task.Run(() => eds.InsertOrUpdate(documents));
 		}
@@ -61,7 +61,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="document">Document.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> DeleteAsync<T>(this IEasyDocumentStorage eds, T document)
+		public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, T document)
 		{
 			return Task.Run(() => eds.Delete(document));
 		}
@@ -72,7 +72,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> DeleteAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+		public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 		{
 			return Task.Run(() => eds.Delete(documents));
 		}
@@ -83,7 +83,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documentId">Document identifier.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> ExistsAsync<T>(this IEasyDocumentStorage eds, string documentId)
+		public static Task<bool> ExistsAsync<T>(this IEZDocumentStorage eds, string documentId)
 		{
 			return Task.Run(() => eds.Exists<T>(documentId));
 		}
@@ -94,7 +94,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type T</returns>
 		/// <param name="documentId">Document identifier.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<T> GetByIdAsync<T>(this IEasyDocumentStorage eds, string documentId)
+		public static Task<T> GetByIdAsync<T>(this IEZDocumentStorage eds, string documentId)
 		{
 			return Task.Run(() => eds.GetById<T>(documentId));
 		}
@@ -105,7 +105,7 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type T</returns>
 		/// <param name="clause">Clause.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<IEnumerable<T>> GetAsync<T>(this IEasyDocumentStorage eds, Func<T, bool> clause = null)
+		public static Task<IEnumerable<T>> GetAsync<T>(this IEZDocumentStorage eds, Func<T, bool> clause = null)
 		{
 			return Task.Run(() => eds.Get<T>(clause));
 		}

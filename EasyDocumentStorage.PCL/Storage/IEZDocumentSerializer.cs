@@ -7,7 +7,7 @@ namespace EasyDocumentStorage.Serialization
 	/// <summary>
 	/// Interface for a simple serializer
 	/// </summary>
-	public interface IEasyDocumentSerializer
+	public interface IEZDocumentSerializer
 	{
 		/// <summary>
 		/// Serialize the specified object into a stream.

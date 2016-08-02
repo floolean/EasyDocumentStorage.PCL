@@ -5,7 +5,11 @@ using PCLCrypto;
 
 namespace EasyDocumentStorage.Crypto
 {
-	public class EasyDocumentEncryptionService : IEasyDocumentEncryptionService
+
+	/// <summary>
+	/// Document encryption service.
+	/// </summary>
+	public class EZDocumentEncryptionService : IEZDocumentEncryptionService
 	{
 
 		const int kKeyLength = 16; //128 bit
@@ -14,13 +18,22 @@ namespace EasyDocumentStorage.Crypto
 		string _salt;
 		ICryptographicKey _cryptographicKey;
 
-		public EasyDocumentEncryptionService(string password, string salt)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:EasyDocumentStorage.Crypto.EZDocumentEncryptionService"/> class.
+		/// </summary>
+		/// <param name="password">Password.</param>
+		/// <param name="salt">Salt.</param>
+		public EZDocumentEncryptionService(string password, string salt)
 		{
 			_key = password;
 			_salt = salt;
 			RegenerateKey();
 		}
 
+		/// <summary>
+		/// Gets or sets the key.
+		/// </summary>
+		/// <value>The key.</value>
 		public string Key
 		{
 			get { return _key; }
@@ -37,6 +50,10 @@ namespace EasyDocumentStorage.Crypto
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the salt.
+		/// </summary>
+		/// <value>The salt.</value>
 		public string Salt
 		{
 			get { return _salt; }
@@ -53,8 +70,16 @@ namespace EasyDocumentStorage.Crypto
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the iv.
+		/// </summary>
+		/// <value>The iv.</value>
 		public byte[] IV { get; set; }
 
+		/// <summary>
+		/// Encrypt the specified stream.
+		/// </summary>
+		/// <param name="stream">Stream.</param>
 		public Stream Encrypt(Stream stream)
 		{
 
@@ -66,6 +91,10 @@ namespace EasyDocumentStorage.Crypto
 
 		}
 
+		/// <summary>
+		/// Decrypt the specified stream.
+		/// </summary>
+		/// <param name="stream">Stream.</param>
 		public Stream Decrypt(Stream stream)
 		{
 
@@ -82,6 +111,12 @@ namespace EasyDocumentStorage.Crypto
 			_cryptographicKey = GenerateCryptoKey(_key, _salt);
 		}
 
+		/// <summary>
+		/// Generates the key.
+		/// </summary>
+		/// <returns>The key.</returns>
+		/// <param name="password">Password.</param>
+		/// <param name="salt">Salt.</param>
 		public static byte[] GenerateKey(string password, string salt)
 		{
 
@@ -91,6 +126,12 @@ namespace EasyDocumentStorage.Crypto
 
 		}
 
+		/// <summary>
+		/// Generates the crypto key.
+		/// </summary>
+		/// <returns>The crypto key.</returns>
+		/// <param name="password">Password.</param>
+		/// <param name="salt">Salt.</param>
 		public static ICryptographicKey GenerateCryptoKey(string password, string salt)
 		{
 

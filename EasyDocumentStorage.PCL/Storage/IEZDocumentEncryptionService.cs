@@ -6,7 +6,7 @@ namespace EasyDocumentStorage.Crypto
 	/// <summary>
 	/// Interface for a simple encryption service
 	/// </summary>
-	public interface IEasyDocumentEncryptionService
+	public interface IEZDocumentEncryptionService
 	{
 		string Key { get; set; }
 		byte[] IV { get; set; }

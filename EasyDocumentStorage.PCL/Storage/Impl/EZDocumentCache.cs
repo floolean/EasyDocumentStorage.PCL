@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace EasyDocumentStorage.Cache
 {
-	public class EasyDocumentCache : IEasyDocumentCache
+	public class EZDocumentCache : IEZDocumentCache
 	{
 
 		int _maxObjects;
 		Dictionary<string, object> _cacheDictionary = new Dictionary<string, object>();
 
-		public EasyDocumentCache()
+		public EZDocumentCache()
 		{
 			_maxObjects = 1000;
 		}

@@ -44,7 +44,7 @@ long as you provide a converter that returns a string.
 
 ```csharp
 void main(){
-	EasyDocumentStorage.Default.Register<MyDocument>(document => document.Id.ToString());
+	EZDocumentStorage.Default.Register<MyDocument>(document => document.Id.ToString());
 }
 ```
 
@@ -52,7 +52,7 @@ void main(){
 
 ```csharp
 bool InsertNewDocument( int id, string name, string author ){
-	return EasyDocumentStorage.Default.Insert( new MyDocument() {
+	return EZDocumentStorage.Default.Insert( new MyDocument() {
     	Id = id,
         Name = name,
         Author = author
@@ -60,20 +60,20 @@ bool InsertNewDocument( int id, string name, string author ){
 }
 
 bool UpdateDocument( MyDocument document ){
-	return EasyDocumentStorage.Default.InsertOrUpdate(document);
+	return EZDocumentStorage.Default.InsertOrUpdate(document);
 }
 
 IEnumerable<MyDocument> GetAllDocuments(){
-	return EasyDocumentStorage.Default.Get<MyDocument>();
+	return EZDocumentStorage.Default.Get<MyDocument>();
 }
 
 IEnumerable<MyDocument> GetAllDocumentsFromAuthor( string author ){
-	return EasyDocumentStorage.Default.Get<MyDocument>( (doc) => doc.Author == author );
+	return EZDocumentStorage.Default.Get<MyDocument>( (doc) => doc.Author == author );
 }
 
 bool DeleteAllDocuments(){
     var docs = GetAllDocuments();
-    return EasyDocumentStorage.Default.Delete(docs);
+    return EZDocumentStorage.Default.Delete(docs);
 }
 ```
 
@@ -82,37 +82,37 @@ bool DeleteAllDocuments(){
 For all methods there is an async extension:
 
 ```csharp
-public static Task<bool> InsertAsync<T>(this IEasyDocumentStorage eds, T document)
+public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, T document)
 
-public static Task<bool> InsertAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 
-public static Task<bool> InsertOrUpdateAsync<T>(this IEasyDocumentStorage eds, T document)
+public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, T document)
 
-public static Task<bool> InsertOrUpdateAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 
-public static Task<bool> DeleteAsync<T>(this IEasyDocumentStorage eds, T document)
+public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, T document)
 
-public static Task<bool> DeleteAsync<T>(this IEasyDocumentStorage eds, IEnumerable<T> documents)
+public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 
-public static Task<bool> ExistsAsync<T>(this IEasyDocumentStorage eds, string documentId)
+public static Task<bool> ExistsAsync<T>(this IEZDocumentStorage eds, string documentId)
 
-public static Task<T> GetByIdAsync<T>(this IEasyDocumentStorage eds, string documentId)
+public static Task<T> GetByIdAsync<T>(this IEZDocumentStorage eds, string documentId)
 
-public static Task<IEnumerable<T>> GetAsync<T>(this IEasyDocumentStorage eds, Func<T, bool> clause = null)
+public static Task<IEnumerable<T>> GetAsync<T>(this IEZDocumentStorage eds, Func<T, bool> clause = null)
 ```
 
 ### Cache
 Optionally you can use the provided cache to speed up the system a little bit:
 
 ```csharp
-EasyDocumentStorage.Default.Cache = new EasyDocumentCache();
+EZDocumentStorage.Default.Cache = new EZDocumentCache();
 ```
 
 ### Cryptography
 There is also a cryptography layer if you need it, just add:
 
 ```csharp
-EasyDocumentStorage.Default.EncryptionService = new EasyDocumentEncryptionService("mykey", "mysalt");
+EZDocumentStorage.Default.EncryptionService = new EZDocumentEncryptionService("mykey", "mysalt");
 ```
 
 Documents will automatically get encrypted with AES 128bit.

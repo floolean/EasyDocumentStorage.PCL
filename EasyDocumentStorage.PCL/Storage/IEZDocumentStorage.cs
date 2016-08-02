@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using EasyDocumentStorage.Cache;
 using EasyDocumentStorage.Crypto;
 using EasyDocumentStorage.Serialization;
@@ -11,7 +10,7 @@ namespace EasyDocumentStorage
 	/// <summary>
 	/// Interface for EasyDocumentStorage
 	/// </summary>
-	public interface IEasyDocumentStorage
+	public interface IEZDocumentStorage
 	{
 
 		/// <summary>
@@ -19,34 +18,34 @@ namespace EasyDocumentStorage
 		/// </summary>
 		/// <returns>True if succesful</returns>
 		/// <value>The cache.</value>
-		IEasyDocumentCache Cache { get; set; }
+		IEZDocumentCache Cache { get; set; }
 
 		/// <summary>
 		/// Gets or sets the serializer.
 		/// </summary>
 		/// <returns>True if succesful</returns>
 		/// <value>The serializer.</value>
-		IEasyDocumentSerializer Serializer { get; set; }
+		IEZDocumentSerializer Serializer { get; set; }
 
 		/// <summary>
 		/// Gets or sets the encryption service.
 		/// </summary>
 		/// <returns>True if succesful</returns>
 		/// <value>The encryption service.</value>
-		IEasyDocumentEncryptionService EncryptionService { get; set; }
+		IEZDocumentEncryptionService EncryptionService { get; set; }
 
 		/// <summary>
 		/// Register a function that takes an instance of type T and return an id as string.
 		/// This is needed because the system is designed to be type agnostic. No interface, base class or pattern is expected.
 		/// You are responsible for obtaining a valid and unique id.
 		/// 
-		/// Optionally you can provide a custom implementation of <see cref="IEasyDocumentSerializer"/> for the type to be registered.
+		/// Optionally you can provide a custom implementation of <see cref="IEZDocumentSerializer"/> for the type to be registered.
 		/// </summary>
 		/// <returns>True if succesful</returns>
 		/// <param name="documentTypeIdProvider">Document type identifier mapper.</param>
 		/// <param name="serializer">Serializer.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		bool Register<T>(Func<T, string> documentTypeIdProvider, IEasyDocumentSerializer serializer = null);
+		bool Register<T>(Func<T, string> documentTypeIdProvider, IEZDocumentSerializer serializer = null);
 
 		/// <summary>
 		/// Insert the specified document.

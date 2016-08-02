@@ -5,7 +5,7 @@ namespace EasyDocumentStorage.Cache
 	/// <summary>
 	/// Cache interface
 	/// </summary>
-	public interface IEasyDocumentCache
+	public interface IEZDocumentCache
 	{
 
 		/// <summary>

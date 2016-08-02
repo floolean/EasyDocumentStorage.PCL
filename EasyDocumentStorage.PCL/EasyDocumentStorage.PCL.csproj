@@ -33,18 +33,18 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\IBlobRepository.cs" />
-    <Compile Include="Storage\IEasyDocumentCache.cs" />
-    <Compile Include="Storage\IEasyDocumentEncryptionService.cs" />
-    <Compile Include="Storage\IEasyDocumentSerializer.cs" />
-    <Compile Include="Storage\IEasyDocumentStorage.cs" />
+    <Compile Include="Storage\IEZDocumentCache.cs" />
+    <Compile Include="Storage\IEZDocumentEncryptionService.cs" />
+    <Compile Include="Storage\IEZDocumentSerializer.cs" />
+    <Compile Include="Storage\IEZDocumentStorage.cs" />
     <Compile Include="Storage\Impl\BinaryDocumentSerializer.cs" />
-    <Compile Include="Storage\Impl\EasyDocumentCache.cs" />
-    <Compile Include="Storage\Impl\EasyDocumentEncryptionService.cs" />
-    <Compile Include="Storage\Impl\EasyDocumentStorage.cs" />
+    <Compile Include="Storage\Impl\EZDocumentCache.cs" />
+    <Compile Include="Storage\Impl\EZDocumentEncryptionService.cs" />
+    <Compile Include="Storage\Impl\EZDocumentStorage.cs" />
     <Compile Include="Storage\Impl\FsBlobRepository.cs" />
     <Compile Include="Storage\Impl\JsonDocumentSerializer.cs" />
     <Compile Include="Extensions\ByteArrayExtensions.cs" />
-    <Compile Include="Extensions\EasyDocumentStorageExtensions.cs" />
+    <Compile Include="Extensions\EZDocumentStorageExtensions.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtension.cs" />

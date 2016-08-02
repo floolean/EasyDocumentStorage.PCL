@@ -11,16 +11,16 @@ namespace EasyDocumentStorage
 	/// <summary>
 	/// EasyDocumentStorage default implementation.
 	/// </summary>
-	public class EasyDocumentStorage : IEasyDocumentStorage
+	public class EZDocumentStorage : IEZDocumentStorage
 	{
 
 		#region MEMBERS
 
-		static EasyDocumentStorage _instance;
+		static EZDocumentStorage _instance;
 
 		FsBlobRepository _blobRepository;
-		IEasyDocumentCache _cache;
-		IEasyDocumentSerializer _serializer;
+		IEZDocumentCache _cache;
+		IEZDocumentSerializer _serializer;
 
 		readonly Dictionary<Type, TypeMapper> _documentTypeMappers = new Dictionary<Type, TypeMapper>();
 
@@ -28,7 +28,7 @@ namespace EasyDocumentStorage
 		/// Gets or sets the cache.
 		/// </summary>
 		/// <value>The cache.</value>
-		public IEasyDocumentCache Cache
+		public IEZDocumentCache Cache
 		{
 			get { return _cache; }
 			set { _cache = value; }
@@ -38,7 +38,7 @@ namespace EasyDocumentStorage
 		/// Gets or sets the serializer.
 		/// </summary>
 		/// <value>The serializer.</value>
-		public IEasyDocumentSerializer Serializer
+		public IEZDocumentSerializer Serializer
 		{
 			get { return _serializer; }
 			set { _serializer = value; }
@@ -48,7 +48,7 @@ namespace EasyDocumentStorage
 		/// Gets or sets the encryption service.
 		/// </summary>
 		/// <value>The encryption service.</value>
-		public IEasyDocumentEncryptionService EncryptionService
+		public IEZDocumentEncryptionService EncryptionService
 		{
 			get;
 			set;
@@ -58,13 +58,13 @@ namespace EasyDocumentStorage
 
 		#region ID MAPPING
 
-		public bool Register<T>(Func<T, string> documentTypeIdMapper, IEasyDocumentSerializer serializer = null)
+		public bool Register<T>(Func<T, string> documentTypeIdMapper, IEZDocumentSerializer serializer = null)
 		{
 
 			var type = typeof(T);
 
 			if (_documentTypeMappers.ContainsKey(type))
-				throw new EasyDocumentStorageException(string.Format("Document type '{0}' has already been registered.", type.Name));
+				throw new EZDocumentStorageException(string.Format("Document type '{0}' has already been registered.", type.Name));
 
 			_documentTypeMappers.Add (type, new TypeMapper () { // register the mapper
 
@@ -172,7 +172,7 @@ namespace EasyDocumentStorage
 		{
 
 			if (string.IsNullOrEmpty(documentId))
-				throw new EasyDocumentStorageException("Document Ids can't be null or empty.");
+				throw new EZDocumentStorageException("Document Ids can't be null or empty.");
 
 			var bucketId = GetBucketId<T>();
 
@@ -225,7 +225,7 @@ namespace EasyDocumentStorage
 			var id = idMapper(document);
 
 			if (string.IsNullOrEmpty(id))
-				throw new EasyDocumentStorageException("A document id can not be null or empty.");
+				throw new EZDocumentStorageException("A document id can not be null or empty.");
 
 			return id;
 
@@ -235,7 +235,7 @@ namespace EasyDocumentStorage
 
 		#region INTERNAL
 
-		private EasyDocumentStorage()
+		private EZDocumentStorage()
 		{
 			_blobRepository = new FsBlobRepository("dse.storage");
 		}
@@ -257,7 +257,7 @@ namespace EasyDocumentStorage
 			if (_documentTypeMappers.TryGetValue(typeof(T), out mapper))
 				return mapper;
 
-			throw new EasyDocumentStorageException(string.Format("No type mapper has been registered for '{0}'", typeof(T).Name));
+			throw new EZDocumentStorageException(string.Format("No type mapper has been registered for '{0}'", typeof(T).Name));
 
 		}
 
@@ -269,11 +269,11 @@ namespace EasyDocumentStorage
 			if (_documentTypeMappers.TryGetValue(typeof(T), out mapper))
 				return mapper.IdMapper;
 
-			throw new EasyDocumentStorageException(string.Format("No Id mapper has been registered for '{0}'", typeof(T).Name));
+			throw new EZDocumentStorageException(string.Format("No Id mapper has been registered for '{0}'", typeof(T).Name));
 
 		}
 		
-		private IEasyDocumentSerializer GetSerializer<T>()
+		private IEZDocumentSerializer GetSerializer<T>()
 		{
 
 			var mapper = GetMapper<T> ();
@@ -318,7 +318,7 @@ namespace EasyDocumentStorage
 		{
 
 			if (!Exists<T>(documentId))
-				throw new EasyDocumentStorageException(string.Format("Document with Id '{0}' does not exist", documentId));
+				throw new EZDocumentStorageException(string.Format("Document with Id '{0}' does not exist", documentId));
 
 			T document = default(T);
 
@@ -383,12 +383,12 @@ namespace EasyDocumentStorage
 		/// Gets the default instance of EasyDocumentStorage. Json is used as default serializer, no cache or encryption initialized.
 		/// </summary>
 		/// <value>The default.</value>
-		public static EasyDocumentStorage Default
+		public static EZDocumentStorage Default
 		{
 			get
 			{
 				if (_instance == null)
-					_instance = new EasyDocumentStorage()
+					_instance = new EZDocumentStorage()
 					{
 						Serializer = new JsonDocumentSerializer()
 					};
@@ -404,13 +404,13 @@ namespace EasyDocumentStorage
 		private struct TypeMapper
 		{
 			public Func<object, string> IdMapper { get; set; }
-			public IEasyDocumentSerializer Serialzer { get; set; }
+			public IEZDocumentSerializer Serialzer { get; set; }
 		}
 
-		public class EasyDocumentStorageException : System.Exception
+		public class EZDocumentStorageException : System.Exception
 		{
-			public EasyDocumentStorageException() { }
-			public EasyDocumentStorageException(string message) : base(message) { }
+			public EZDocumentStorageException() { }
+			public EZDocumentStorageException(string message) : base(message) { }
 		}
 		
 		#endregion
