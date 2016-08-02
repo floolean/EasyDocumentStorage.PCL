@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace System.Linq
 {
-	public static class LinqExtensions
+	internal static class LinqExtensions
 	{
 
 		/// <summary>
@@ -12,7 +12,7 @@ namespace System.Linq
 		/// <typeparam name="T"></typeparam>
 		/// <param name="enumerable"></param>
 		/// <returns></returns>
-		public static bool IsEmpty<T>(this IEnumerable<T> enumerable)
+		internal static bool IsEmpty<T>(this IEnumerable<T> enumerable)
 		{
 			return !enumerable.Any();
 		}
@@ -23,13 +23,13 @@ namespace System.Linq
         /// <typeparam name="T"></typeparam>
         /// <param name="enumerable"></param>
         /// <returns></returns>
-		public static bool None<T>(this IEnumerable<T> enumerable)
+		internal static bool None<T>(this IEnumerable<T> enumerable)
 		{
 			return !enumerable.Any();
 		}
 
 
-		public static void ForEach(this IEnumerable enumerable, Action<object> action)
+		internal static void ForEach(this IEnumerable enumerable, Action<object> action)
 		{
 			foreach (var item in enumerable)
 			{
@@ -37,7 +37,7 @@ namespace System.Linq
 			}
 		}
 
-		public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
+		internal static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action)
 		{
 			foreach (var item in enumerable)
 			{
@@ -51,7 +51,7 @@ namespace System.Linq
 		/// <typeparam name="TResult"></typeparam>
 		/// <param name="source"></param>
 		/// <returns></returns>
-		public static TResult Random<TResult>(this IEnumerable<TResult> source)
+		internal static TResult Random<TResult>(this IEnumerable<TResult> source)
 		{
 			var enumerable = source as TResult[] ?? source.ToArray();
 

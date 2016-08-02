@@ -12,16 +12,14 @@ PM> Install-Package EasyDocumentStorage.PCL
 
 ### Platforms
 
+ * Net45
+ * WP8.1
+ * Windows 8
+ * WP8 Silverlight
  * Xamarin Android
  * Xamarin iOS
  * Xamarin iOS Classic
  * Xamarin.Mac.Unified
- * Net45
- * WP8.1
- * Win8
- * WP8 Silverlight
-
-
 
 
 ## Let' see some code!
@@ -99,6 +97,14 @@ public static Task<bool> ExistsAsync<T>(this IEZDocumentStorage eds, string docu
 public static Task<T> GetByIdAsync<T>(this IEZDocumentStorage eds, string documentId)
 
 public static Task<IEnumerable<T>> GetAsync<T>(this IEZDocumentStorage eds, Func<T, bool> clause = null)
+```
+
+### Binary Serialization
+
+```csharp
+void main(){
+	EZDocumentStorage.Default.Serializer = new BinaryDocumentSerializer();
+}
 ```
 
 ### Cache

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>EasyDocumentStorage.PCL</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <authors>floolean</authors>
         <owners>floolean</owners>
         <licenseUrl>https://github.com/floolean\EasyDocumentStorage.PCL/blob/master/LICENSE</licenseUrl>
@@ -11,7 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>EasyDocumentStorage PCL provides a basic and easy to use cross platform document storage.</description>
         <summary>An easy to use cross-platform .NET document storage engine.</summary>
-        <releaseNotes>Renamed classes from Easy to EZ prefix so it doesn't collide with the namespace, added more documentation.</releaseNotes>
+        <releaseNotes>Moved static utility extensions to internal to avoid conflicts.</releaseNotes>
         <copyright>Copyright 2016</copyright>
         <language>en-US</language>
         <tags>document storage serialization database db dotnet simple easy portable pcl android ios xamarin monoandroid monodroid monotouch</tags>

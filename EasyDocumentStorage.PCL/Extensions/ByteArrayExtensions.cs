@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace System
 {
-    public static class ByteArrayExtensions
+    internal static class ByteArrayExtensions
     {
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace System
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static byte[] ToMd5Buffer(this byte[] array)
+        internal static byte[] ToMd5Buffer(this byte[] array)
         {
 
             var md5 = PCLCrypto.WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(PCLCrypto.HashAlgorithm.Md5);
@@ -29,7 +29,7 @@ namespace System
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static string ToMd5String(this byte[] array)
+        internal static string ToMd5String(this byte[] array)
         {
 
             var result = array.ToMd5Buffer();
@@ -43,7 +43,7 @@ namespace System
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static byte[] ToBase64Buffer(this byte[] array)
+        internal static byte[] ToBase64Buffer(this byte[] array)
         {
 
             var buffer = Encoding.UTF8.GetBytes(array.ToBase64String());
@@ -57,7 +57,7 @@ namespace System
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static string ToBase64String(this byte[] array)
+        internal static string ToBase64String(this byte[] array)
         {
 
             var base64String = Convert.ToBase64String(array);
@@ -71,7 +71,7 @@ namespace System
         /// </summary>
         /// <param name="array"></param>
         /// <returns></returns>
-        public static string ToUtf8String(this byte[] array)
+        internal static string ToUtf8String(this byte[] array)
         {
 
             var result = Encoding.UTF8.GetString(array, 0, array.Length);
@@ -85,7 +85,7 @@ namespace System
 		/// </summary>
 		/// <returns>The stream.</returns>
 		/// <param name="array">Array.</param>
-		public static Stream ToStream(this byte[] array)
+		internal static Stream ToStream(this byte[] array)
 		{
 			return new MemoryStream(array);
 		}

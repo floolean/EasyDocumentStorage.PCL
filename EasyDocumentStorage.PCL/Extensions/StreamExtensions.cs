@@ -3,9 +3,9 @@ using System.Text;
 
 namespace System.IO
 {
-	public static class StreamExtensions
+	internal static class StreamExtensions
 	{
-		public static byte[] ToBuffer(this Stream stream)
+		internal static byte[] ToBuffer(this Stream stream)
 		{
 
 			if (stream is MemoryStream)
@@ -24,7 +24,7 @@ namespace System.IO
 
 		}
 
-		public static string ToUtf8String(this Stream stream)
+		internal static string ToUtf8String(this Stream stream)
 		{
 
 			var array = stream.ToBuffer();

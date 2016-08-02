@@ -6,7 +6,7 @@ using PCLCrypto;
 
 namespace System
 {
-    public static class StringExtension
+    internal static class StringExtension
     {
 
         /// <summary>
@@ -14,7 +14,7 @@ namespace System
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static string ToMd5String(this string text)
+        internal static string ToMd5String(this string text)
         {
             return Encoding.UTF8.GetBytes(text).ToMd5String();
         }
@@ -24,7 +24,7 @@ namespace System
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static byte[] ToMd5Buffer(this string text)
+        internal static byte[] ToMd5Buffer(this string text)
         {
             return Encoding.UTF8.GetBytes(text).ToMd5Buffer();
         }
@@ -34,7 +34,7 @@ namespace System
         /// </summary>
         /// <param name="length"></param>
         /// <returns></returns>
-        public static string GetRandomString(int length = 20)
+        internal static string GetRandomString(int length = 20)
         {
 
             var buffer = WinRTCrypto.CryptographicBuffer.GenerateRandom(length);
@@ -48,7 +48,7 @@ namespace System
         /// </summary>
         /// <param name="length"></param>
         /// <returns></returns>
-        public static string GetRandomBase64String(int length = 20)
+        internal static string GetRandomBase64String(int length = 20)
         {
 
             var buffer = WinRTCrypto.CryptographicBuffer.GenerateRandom(length);
@@ -57,7 +57,7 @@ namespace System
 
         }
 
-		public static byte[] ToBuffer(this string str, Encoding encoding = null)
+		internal static byte[] ToBuffer(this string str, Encoding encoding = null)
 		{
 
 			if (encoding == null)
