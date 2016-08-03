@@ -1,8 +1,8 @@
 # EasyDocumentStorage.PCL
 
 .NET cross-platform easy to use document storage engine. Documents are kept on disc as files.
-The default implementation uses Json.Net as default serializer, a binary serializer is also provided via SharpSerializer.PCL.
 It is supposed to be used with small to medium datasets, as it is not a high performance solution.
+The default implementation uses Json.Net as default serializer which is useful for symple types, a binary serializer is also provided via SharpSerializer.PCL for more complex types with fields that use inherited classes.
 
 ### Install with nuget
 
@@ -37,8 +37,7 @@ class MyDocument {
 ```
 
 Somewhere in your code you need to register the previously created MyDocument class, this is the only configuration
-needed as EasyDocumentStorage treats ids internally as string. This way you can use whatever you want as id, as 
-long as you provide a converter that returns a string.
+needed, as EasyDocumentStorage treats ids internally as string and doesn't know which field to use as an id. This way you can use whatever type/field you want as id, as long as you provide a converter that returns a string.
 
 ```csharp
 void main(){
@@ -48,13 +47,16 @@ void main(){
 
 ### Usage
 
+#### Simple Types
+
 ```csharp
 bool InsertNewDocument( int id, string name, string author ){
-	return EZDocumentStorage.Default.Insert( new MyDocument() {
+    var document = new MyDocument() {
     	Id = id,
         Name = name,
         Author = author
-    });
+    };
+	return EZDocumentStorage.Default.Insert(document);
 }
 
 bool UpdateDocument( MyDocument document ){
@@ -75,29 +77,54 @@ bool DeleteAllDocuments(){
 }
 ```
 
-### Async
+#### Complex Types
 
-For all methods there is an async extension:
+When storing complex types with the Json.Net serializer, keep in mind that Json doesn't store any type
+information, polymorphism is hence not supported. Example:
 
 ```csharp
-public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, T document)
+interface IContent {
+}
 
-public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+class TextContent : IContent {
+	public string Text { get; set; }
+}
 
-public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, T document)
+class BitmapContent : IContent {
+	public Bitmap Bitmap { get; set; }
+}
 
-public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
-
-public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, T document)
-
-public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
-
-public static Task<bool> ExistsAsync<T>(this IEZDocumentStorage eds, string documentId)
-
-public static Task<T> GetByIdAsync<T>(this IEZDocumentStorage eds, string documentId)
-
-public static Task<IEnumerable<T>> GetAsync<T>(this IEZDocumentStorage eds, Func<T, bool> clause = null)
+class MyDocument {
+	public int Id { get; set; }
+    public string Name { get; set; }
+    public string Author { get; set; }
+    public List<IContent> Contents { get; set; } // a document can have many IContent derived items
+}
 ```
+
+Let's create a new document with some content:
+
+```csharp
+var document = new MyDocument(){
+	Id = 1,
+    Name = "Document",
+    Author = "Author",
+    Contents = new List<IContent>(){
+    	new TextContent(){ 
+        	Text = "Hello World"
+        },
+        new TextContent(){
+        	Text = "From Json"
+        },
+        new BitmapContent(){
+        	Bitmap = new Bitmap()
+        }
+    }
+};
+```
+
+In this case, when serializing the document, Json.Net will actually store the values of the content items, but when deserializing it 
+will not know which type to instantiate and the Contents collection will be empty. The binary serializer can overcome this by storing type information.
 
 ### Binary Serialization
 
@@ -105,6 +132,30 @@ public static Task<IEnumerable<T>> GetAsync<T>(this IEZDocumentStorage eds, Func
 void main(){
 	EZDocumentStorage.Default.Serializer = new BinaryDocumentSerializer();
 }
+```
+
+### Async
+
+For all CRUD methods there is an async extension:
+
+```csharp
+public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, T document)
+
+public static Task<bool> InsertAllAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+
+public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, T document)
+
+public static Task<bool> InsertOrUpdateAllAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+
+public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, T document)
+
+public static Task<bool> DeleteAllAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+
+public static Task<bool> ExistsAsync<T>(this IEZDocumentStorage eds, string documentId)
+
+public static Task<T> GetByIdAsync<T>(this IEZDocumentStorage eds, string documentId)
+
+public static Task<IEnumerable<T>> GetAsync<T>(this IEZDocumentStorage eds, Func<T, bool> clause = null)
 ```
 
 ### Cache

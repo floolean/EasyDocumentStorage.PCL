@@ -61,7 +61,7 @@ namespace EasyDocumentStorage
 		/// <returns>True if succesful</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		bool Insert<T>(IEnumerable<T> documents);
+		bool InsertAll<T>(IEnumerable<T> documents);
 
 		/// <summary>
 		/// Inserts or updates the specified document.
@@ -77,7 +77,7 @@ namespace EasyDocumentStorage
 		/// <returns>The or update.</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		bool InsertOrUpdate<T>(IEnumerable<T> documents);
+		bool InsertOrUpdateAll<T>(IEnumerable<T> documents);
 
 		/// <summary>
 		/// Deletes the specified document.
@@ -93,7 +93,7 @@ namespace EasyDocumentStorage
 		/// <returns>True if succesful</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		bool Delete<T>(IEnumerable<T> documents);
+		bool DeleteAll<T>(IEnumerable<T> documents);
 
 		/// <summary>
 		/// Checks if the specified document exists

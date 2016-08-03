@@ -5,6 +5,7 @@ using System.Linq;
 using EasyDocumentStorage.Cache;
 using EasyDocumentStorage.Serialization;
 using EasyDocumentStorage.Crypto;
+using EasyDocumentStorage;
 
 namespace EasyDocumentStorage
 {
@@ -58,6 +59,12 @@ namespace EasyDocumentStorage
 
 		#region ID MAPPING
 
+		/// <summary>
+		/// Register the specified documentTypeIdMapper and serializer.
+		/// </summary>
+		/// <param name="documentTypeIdMapper">Document type identifier mapper.</param>
+		/// <param name="serializer">Serializer.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public bool Register<T>(Func<T, string> documentTypeIdMapper, IEZDocumentSerializer serializer = null)
 		{
 
@@ -88,6 +95,11 @@ namespace EasyDocumentStorage
 
 		#region SYNCHRONOUS METHODS
 
+		/// <summary>
+		/// Insert the specified document.
+		/// </summary>
+		/// <param name="document">Document.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public bool Insert<T>(T document)
 		{
 
@@ -101,7 +113,12 @@ namespace EasyDocumentStorage
 
 		}
 
-		public bool Insert<T>(IEnumerable<T> documents)
+		/// <summary>
+		/// Insert the specified documents.
+		/// </summary>
+		/// <param name="documents">Documents.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public bool InsertAll<T>(IEnumerable<T> documents)
 		{
 
 			var result = true;
@@ -115,6 +132,12 @@ namespace EasyDocumentStorage
 
 		}
 
+		/// <summary>
+		/// Inserts or updates a document.
+		/// </summary>
+		/// <returns>The or update.</returns>
+		/// <param name="document">Document.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public bool InsertOrUpdate<T>(T document)
 		{
 
@@ -128,7 +151,13 @@ namespace EasyDocumentStorage
 
 		}
 
-		public bool InsertOrUpdate<T>(IEnumerable<T> documents)
+		/// <summary>
+		/// Inserts or updates a collection of documents.
+		/// </summary>
+		/// <returns>The or update.</returns>
+		/// <param name="documents">Documents.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public bool InsertOrUpdateAll<T>(IEnumerable<T> documents)
 		{
 			var result = true;
 
@@ -141,6 +170,11 @@ namespace EasyDocumentStorage
 
 		}
 
+		/// <summary>
+		/// Delete the specified document.
+		/// </summary>
+		/// <param name="document">Document.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public bool Delete<T>(T document)
 		{
 
@@ -148,7 +182,7 @@ namespace EasyDocumentStorage
 
 			var bucketId = GetBucketId<T>();
 
-			_blobRepository.DeleteBlob(bucketId, docId).RunSynchronously();
+			_blobRepository.DeleteBlob(bucketId, docId).Wait();
 
 			RemoveCachedDocument<T>(bucketId, docId);
 
@@ -156,7 +190,12 @@ namespace EasyDocumentStorage
 
 		}
 
-		public bool Delete<T>(IEnumerable<T> documents)
+		/// <summary>
+		/// Delete the specified documents.
+		/// </summary>
+		/// <param name="documents">Documents.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public bool DeleteAll<T>(IEnumerable<T> documents)
 		{
 			var result = true;
 
@@ -168,6 +207,11 @@ namespace EasyDocumentStorage
 			return result;
    		}
 
+		/// <summary>
+		/// Exists the specified documentId.
+		/// </summary>
+		/// <param name="documentId">Document identifier.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public bool Exists<T>(string documentId)
 		{
 
@@ -182,6 +226,11 @@ namespace EasyDocumentStorage
 
 		}
 
+		/// <summary>
+		/// Get the specified clause.
+		/// </summary>
+		/// <param name="clause">Clause.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public IEnumerable<T> Get<T>(Func<T, bool> clause = null)
 		{
 
@@ -205,6 +254,12 @@ namespace EasyDocumentStorage
 
 		}
 
+		/// <summary>
+		/// Gets the document by identifier.
+		/// </summary>
+		/// <returns>The by identifier.</returns>
+		/// <param name="documentId">Document identifier.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public T GetById<T>(string documentId)
 		{
 			
@@ -214,6 +269,12 @@ namespace EasyDocumentStorage
 
 		}
 
+		/// <summary>
+		/// Gets the document identifier.
+		/// </summary>
+		/// <returns>The document identifier.</returns>
+		/// <param name="document">Document.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public string GetDocumentId<T>(T document)
 		{
 
@@ -407,11 +468,27 @@ namespace EasyDocumentStorage
 			public IEZDocumentSerializer Serialzer { get; set; }
 		}
 
+		/// <summary>
+		/// EZDocument storage exception.
+		/// </summary>
 		public class EZDocumentStorageException : System.Exception
 		{
+			/// <summary>
+			/// Initializes a new instance of the
+			/// <see cref="T:EasyDocumentStorage.EZDocumentStorage.EZDocumentStorageException"/> class.
+			/// </summary>
 			public EZDocumentStorageException() { }
+
+			/// <summary>
+			/// Initializes a new instance of the
+			/// <see cref="T:EasyDocumentStorage.EZDocumentStorage.EZDocumentStorageException"/> class.
+			/// </summary>
+			/// <param name="message">Message.</param>
 			public EZDocumentStorageException(string message) : base(message) { }
+
 		}
+
+
 		
 		#endregion
 

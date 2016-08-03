@@ -8,10 +8,19 @@ namespace EasyDocumentStorage.Crypto
 	/// </summary>
 	public interface IEZDocumentEncryptionService
 	{
-		string Key { get; set; }
-		byte[] IV { get; set; }
+		
+		/// <summary>
+		/// Encrypt the specified stream.
+		/// </summary>
+		/// <param name="stream">Stream.</param>
 		Stream Encrypt(Stream stream);
+
+		/// <summary>
+		/// Decrypt the specified stream.
+		/// </summary>
+		/// <param name="stream">Stream.</param>
 		Stream Decrypt(Stream stream);
+
 	}
 }
 

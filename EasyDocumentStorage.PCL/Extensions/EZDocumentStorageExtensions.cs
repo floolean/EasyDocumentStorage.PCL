@@ -28,9 +28,9 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> InsertAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+		public static Task<bool> InsertAllAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 		{
-			return Task.Run(() => eds.Insert(documents));
+			return Task.Run(() => eds.InsertAll(documents));
 		}
 
 		/// <summary>
@@ -50,9 +50,9 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> InsertOrUpdateAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+		public static Task<bool> InsertOrUpdateAllAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 		{
-			return Task.Run(() => eds.InsertOrUpdate(documents));
+			return Task.Run(() => eds.InsertOrUpdateAll(documents));
 		}
 
 		/// <summary>
@@ -72,9 +72,9 @@ namespace EasyDocumentStorage
 		/// <returns>Task of type bool</returns>
 		/// <param name="documents">Documents.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
-		public static Task<bool> DeleteAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
+		public static Task<bool> DeleteAllAsync<T>(this IEZDocumentStorage eds, IEnumerable<T> documents)
 		{
-			return Task.Run(() => eds.Delete(documents));
+			return Task.Run(() => eds.DeleteAll(documents));
 		}
 
 		/// <summary>

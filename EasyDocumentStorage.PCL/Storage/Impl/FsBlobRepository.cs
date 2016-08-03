@@ -239,8 +239,10 @@ namespace EasyDocumentStorage
 
 				if (result == ExistenceCheckResult.FileExists)
 				{
-				
-					await bucketFolder.DeleteAsync();
+
+					var file = await bucketFolder.GetFileAsync(blobId);
+
+					await file.DeleteAsync();
 
 					IterateListeners(l => l.BlobDeleted(bucketId, blobId));
 
