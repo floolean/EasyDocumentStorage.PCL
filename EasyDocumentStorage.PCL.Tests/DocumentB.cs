@@ -3,9 +3,8 @@ namespace EasyDocumentStorage.PCL.Tests
 {
 	public class DocumentB
 	{
-		public DocumentB()
-		{
-		}
+		public int Id { get; set; }
+		public DateTime Created { get; set; }
 	}
 }
 

@@ -48,16 +48,16 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 			EZDocumentStorage.Default.EncryptionService = null;
 			EZDocumentStorage.Default.Serializer = new JsonDocumentSerializer();
 
-			Console.WriteLine("* TEST '{0}' *", description);
+			var desc = string.Format("'{0}' =>\t\t", description);
 
 			setup(EZDocumentStorage.Default);
 
 			var documents = CreateDocuments(documentCount);
 
-			Run(string.Format("Inserting {0} documents", documentCount), ()=>InsertDocuments(documents));
-			Run(string.Format("Retrieving {0} documents", documentCount), () => GetDocuments());
+			Run(string.Format("{0}Inserting {1} documents", desc, documentCount), () => InsertDocuments(documents));
+			Run(string.Format("{0}Retrieving {1} documents", desc, documentCount), () => GetDocuments());
 
-			Console.WriteLine("\tCleaning up..");
+			Console.WriteLine("Cleaning up..");
 			DeleteDocuments(documents);
 
 		}
@@ -99,7 +99,7 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 		static void Run(string description, Action action)
 		{
 
-			Console.Write("\tExecuting '{0}'..", description);
+			Console.Write("Executing '{0}'..", description);
 
 			var watch = Stopwatch.StartNew();
 

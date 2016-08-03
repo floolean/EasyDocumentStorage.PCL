@@ -8,6 +8,7 @@
     <RootNamespace>EasyDocumentStorage.PCL.Tests</RootNamespace>
     <AssemblyName>EasyDocumentStorage.PCL.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.0.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,9 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EasyDocumentStorageTests.cs" />
     <Compile Include="DocumentA.cs" />
     <Compile Include="DocumentB.cs" />
+    <Compile Include="ComplexDocument.cs" />
+    <Compile Include="EZDocumentStorageTestsJson.cs" />
+    <Compile Include="EZDocumentStorageBinaryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

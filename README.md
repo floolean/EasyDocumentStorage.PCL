@@ -30,7 +30,7 @@ Create a simple document class first:
 
 ```csharp
 class MyDocument {
-	public int Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public string Author { get; set; }
 }
@@ -56,19 +56,19 @@ bool InsertNewDocument( int id, string name, string author ){
         Name = name,
         Author = author
     };
-	return EZDocumentStorage.Default.Insert(document);
+    return EZDocumentStorage.Default.Insert(document);
 }
 
 bool UpdateDocument( MyDocument document ){
-	return EZDocumentStorage.Default.InsertOrUpdate(document);
+    return EZDocumentStorage.Default.InsertOrUpdate(document);
 }
 
 IEnumerable<MyDocument> GetAllDocuments(){
-	return EZDocumentStorage.Default.Get<MyDocument>();
+    return EZDocumentStorage.Default.Get<MyDocument>();
 }
 
 IEnumerable<MyDocument> GetAllDocumentsFromAuthor( string author ){
-	return EZDocumentStorage.Default.Get<MyDocument>( (doc) => doc.Author == author );
+    return EZDocumentStorage.Default.Get<MyDocument>( (doc) => doc.Author == author );
 }
 
 bool DeleteAllDocuments(){
@@ -84,18 +84,19 @@ information, polymorphism is hence not supported. Example:
 
 ```csharp
 interface IContent {
+
 }
 
 class TextContent : IContent {
-	public string Text { get; set; }
+    public string Text { get; set; }
 }
 
 class BitmapContent : IContent {
-	public Bitmap Bitmap { get; set; }
+    public Bitmap Bitmap { get; set; }
 }
 
 class MyDocument {
-	public int Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public string Author { get; set; }
     public List<IContent> Contents { get; set; } // a document can have many IContent derived items
@@ -106,18 +107,18 @@ Let's create a new document with some content:
 
 ```csharp
 var document = new MyDocument(){
-	Id = 1,
+    Id = 1,
     Name = "Document",
     Author = "Author",
     Contents = new List<IContent>(){
     	new TextContent(){ 
-        	Text = "Hello World"
+            Text = "Hello World"
         },
         new TextContent(){
-        	Text = "From Json"
+            Text = "From Json"
         },
         new BitmapContent(){
-        	Bitmap = new Bitmap()
+            Bitmap = new Bitmap()
         }
     }
 };
@@ -130,7 +131,7 @@ will not know which type to instantiate and the Contents collection will be empt
 
 ```csharp
 void main(){
-	EZDocumentStorage.Default.Serializer = new BinaryDocumentSerializer();
+    EZDocumentStorage.Default.Serializer = new BinaryDocumentSerializer();
 }
 ```
 
