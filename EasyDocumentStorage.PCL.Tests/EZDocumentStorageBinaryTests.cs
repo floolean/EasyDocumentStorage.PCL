@@ -1,8 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using EasyDocumentStorage.Serialization;
-using EasyDocumentStorage.Crypto;
-using EasyDocumentStorage.Cache;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,12 +8,10 @@ namespace EasyDocumentStorage.PCL.Tests
 	public class EZDocumentStorageBinaryTests : EZDocumentStorageTestsJson
 	{
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void Setup()
 		{
-
 			_eds.Serializer = _binarySerializer;
-
 		}
 
 		[Test()]
@@ -68,7 +62,7 @@ namespace EasyDocumentStorage.PCL.Tests
 
 			Assert.IsNotNull(document);
 
-			Assert.IsTrue(document.Contents.Any(c => c.GetType() == typeof(TextContent)));
+			Assert.AreEqual(2, document.Contents.Count(c => c.GetType() == typeof(TextContent)));
 
 			Assert.IsTrue(document.Contents.Any(c => c.GetType() == typeof(NumericContent)));
 
@@ -79,7 +73,6 @@ namespace EasyDocumentStorage.PCL.Tests
 			Assert.AreEqual(42, numericContent.Number);
 
 		}
-
 
 	}
 }

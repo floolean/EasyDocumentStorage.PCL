@@ -18,7 +18,7 @@ namespace EasyDocumentStorage.PCL.Tests
 
 		static bool _documentTypesRegistered;
 
-		[TestFixtureSetUp]
+		[OneTimeSetUp]
 		public void BaseSetup()
 		{
 			if (!_documentTypesRegistered)
@@ -83,7 +83,7 @@ namespace EasyDocumentStorage.PCL.Tests
 		}
 
 		[Test()]
-		public void RetriveDocument()
+		public void RetrieveDocument()
 		{
 
 
@@ -99,6 +99,27 @@ namespace EasyDocumentStorage.PCL.Tests
 			Assert.IsTrue(_eds.Exists<DocumentA>(1.ToString()));
 
 			Assert.IsNotNull(_eds.Get<DocumentA>(d => d.Id == 1));
+
+		}
+
+
+		[Test()]
+		public void InsertFailsIfDocumentExists()
+		{
+
+			var doc = new DocumentA()
+			{
+				Id = 1,
+				Created = DateTime.Parse("1.1.2000")
+			};
+
+			Assert.IsTrue(_eds.Insert(doc));
+
+			Assert.IsTrue(_eds.Exists<DocumentA>(1.ToString()));
+
+			Assert.IsNotNull(_eds.Get<DocumentA>(d => d.Id == 1));
+
+			Assert.Catch(() =>_eds.Insert(doc));
 
 		}
 

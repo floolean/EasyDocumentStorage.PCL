@@ -15,6 +15,8 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 		public static void Main(string[] args)
 		{
 
+			Console.BufferWidth = 160;
+
 			Console.WriteLine("********************************************");
 			Console.WriteLine("****EasyDocumentStorage Performance Tests***");
 			Console.WriteLine("");
@@ -48,14 +50,15 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 			EZDocumentStorage.Default.EncryptionService = null;
 			EZDocumentStorage.Default.Serializer = new JsonDocumentSerializer();
 
-			var desc = string.Format("'{0}' =>\t\t", description);
+			var desc = string.Format("{0} =>\t", description);
 
 			setup(EZDocumentStorage.Default);
 
 			var documents = CreateDocuments(documentCount);
 
-			Run(string.Format("{0}Inserting {1} documents", desc, documentCount), () => InsertDocuments(documents));
-			Run(string.Format("{0}Retrieving {1} documents", desc, documentCount), () => GetDocuments());
+			Run(string.Format("{0}INS {1} documents", desc, documentCount), () => InsertDocuments(documents));
+			Run(string.Format("{0}UPD {1} documents", desc, documentCount), () => UpdateDocuments(documents));
+			Run(string.Format("{0}GET {1} documents", desc, documentCount), () => RetrieveDocuments());
 
 			Console.WriteLine("Cleaning up..");
 			DeleteDocuments(documents);
@@ -81,7 +84,12 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 
 		}
 
-		static IEnumerable<MyDocument> GetDocuments()
+		static bool UpdateDocuments(IEnumerable<MyDocument> documents)
+		{
+			return EZDocumentStorage.Default.InsertOrUpdateAll(documents);
+		}
+
+		static IEnumerable<MyDocument> RetrieveDocuments()
 		{
 			return EZDocumentStorage.Default.Get<MyDocument>();
 		}
@@ -99,7 +107,7 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 		static void Run(string description, Action action)
 		{
 
-			Console.Write("Executing '{0}'..", description);
+			Console.Write("Executing {0}..", description);
 
 			var watch = Stopwatch.StartNew();
 
@@ -109,7 +117,7 @@ namespace EasyDocumentStorage.PCL.PerformaceTests
 
 			var elapsedMs = watch.ElapsedMilliseconds;
 
-			Console.WriteLine(" Elapsed in {0} ms", elapsedMs);
+			Console.WriteLine(" {0} ms (avg. {1} ms)", elapsedMs, elapsedMs / kDocumentCount);
 
 		}
 

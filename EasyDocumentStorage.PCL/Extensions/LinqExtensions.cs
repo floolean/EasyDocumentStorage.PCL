@@ -6,6 +6,8 @@ namespace System.Linq
 	internal static class LinqExtensions
 	{
 
+        static Random _rnd = new Random();
+
 		/// <summary>
 		/// Counterpart of IEnumerable.Any()
 		/// </summary>
@@ -44,6 +46,14 @@ namespace System.Linq
 				action(item);
 			}
 		}
+
+	    internal static void Times(this int number, Action<int> action)
+	    {
+	        for (var i = 0; i < number; i++)
+	        {
+	            action(i);
+	        }
+	    }
 
 		/// <summary>
 		/// Get a random element from a collection
