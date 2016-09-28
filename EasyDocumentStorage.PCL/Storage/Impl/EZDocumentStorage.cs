@@ -197,17 +197,10 @@ namespace EasyDocumentStorage
 		/// <typeparam name="T">The document type parameter.</typeparam>
 		public bool DeleteAll<T>(IEnumerable<T> documents)
 		{
-			var result = true;
+		    return documents.Aggregate(true, (current, document) => current & Delete(document));
+		}
 
-			foreach (var document in documents)
-			{
-				result &= Delete(document);
-			}
-
-			return result;
-   		}
-
-		/// <summary>
+	    /// <summary>
 		/// Exists the specified documentId.
 		/// </summary>
 		/// <param name="documentId">Document identifier.</param>
@@ -350,7 +343,7 @@ namespace EasyDocumentStorage
 
 				var type = mapper.Key;
 
-				var genericMethod = methodInfo.MakeGenericMethod(new Type[] { type });
+				var genericMethod = methodInfo.MakeGenericMethod(new [] { type });
 
 				genericMethod.Invoke(this, null);
 

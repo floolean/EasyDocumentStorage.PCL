@@ -41,7 +41,7 @@ namespace EasyDocumentStorage.Crypto
 			{
 
 				if (string.IsNullOrEmpty(value))
-					throw new ArgumentNullException(nameof(value));
+					throw new ArgumentNullException("value");
 
 				_key = value;
 
@@ -61,7 +61,7 @@ namespace EasyDocumentStorage.Crypto
 			{
 
 				if (string.IsNullOrEmpty(value))
-					throw new ArgumentNullException(nameof(value));
+                    throw new ArgumentNullException("value");
 
 				_salt = value;
 

@@ -26,7 +26,9 @@ namespace EasyDocumentStorage.PCL.Tests
 				EZDocumentStorage.Default.Register<DocumentA>(doc => doc.Id.ToString());
 				EZDocumentStorage.Default.Register<DocumentB>(doc => doc.Id.ToString());
 				EZDocumentStorage.Default.Register<ComplexDocument>(doc => doc.Id.ToString());
+                Cleanup();
 			}
+
 			_documentTypesRegistered = true;
 		}
 
@@ -40,9 +42,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				Created = DateTime.Parse("1.1.2000")
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(EZDocumentStorage.Default.Insert(doc));
 
-			Assert.IsTrue(EZDocumentStorage.Default.Exists<DocumentA>(1.ToString()));
+            Assert.IsTrue(EZDocumentStorage.Default.Exists<DocumentA>(docId));
 
 		}
 
@@ -56,9 +60,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				Created = DateTime.Parse("1.1.2000")
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(EZDocumentStorage.Default.InsertOrUpdate(doc));
 
-			Assert.IsTrue(EZDocumentStorage.Default.Exists<DocumentA>(1.ToString()));
+            Assert.IsTrue(EZDocumentStorage.Default.Exists<DocumentA>(docId));
 
 		}
 
@@ -74,9 +80,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				Created = DateTime.Parse("1.1.2000")
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(_eds.Insert(doc));
 
-			Assert.IsTrue(_eds.Exists<DocumentA>(1.ToString()));
+			Assert.IsTrue(_eds.Exists<DocumentA>(docId));
 
 			Assert.IsTrue(_eds.Delete<DocumentA>(doc));
 
@@ -94,9 +102,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				Created = DateTime.Parse("1.1.2000")
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(_eds.Insert(doc));
 
-			Assert.IsTrue(_eds.Exists<DocumentA>(1.ToString()));
+            Assert.IsTrue(_eds.Exists<DocumentA>(docId));
 
 			Assert.IsNotNull(_eds.Get<DocumentA>(d => d.Id == 1));
 
@@ -113,9 +123,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				Created = DateTime.Parse("1.1.2000")
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(_eds.Insert(doc));
 
-			Assert.IsTrue(_eds.Exists<DocumentA>(1.ToString()));
+            Assert.IsTrue(_eds.Exists<DocumentA>(docId));
 
 			Assert.IsNotNull(_eds.Get<DocumentA>(d => d.Id == 1));
 

@@ -31,9 +31,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				}
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(EZDocumentStorage.Default.Insert(doc));
 
-			Assert.IsTrue(EZDocumentStorage.Default.Exists<ComplexDocument>(1.ToString()));
+			Assert.IsTrue(EZDocumentStorage.Default.Exists<ComplexDocument>(docId));
 
 		}
 
@@ -54,9 +56,11 @@ namespace EasyDocumentStorage.PCL.Tests
 				}
 			};
 
+            var docId = _eds.GetDocumentId(doc);
+
 			Assert.IsTrue(EZDocumentStorage.Default.Insert(doc));
 
-			Assert.IsTrue(EZDocumentStorage.Default.Exists<ComplexDocument>(1.ToString()));
+            Assert.IsTrue(EZDocumentStorage.Default.Exists<ComplexDocument>(docId));
 
 			var document = _eds.Get<ComplexDocument>().FirstOrDefault();
 
