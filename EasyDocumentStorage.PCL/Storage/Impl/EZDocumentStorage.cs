@@ -21,7 +21,7 @@ namespace EasyDocumentStorage
 
 		FsBlobRepository _blobRepository;
 		IEZDocumentCache _cache;
-		IEZDocumentSerializer _serializer;
+		IEZDocumentSerializer _serializer = new JsonDocumentSerializer();
 
 		readonly Dictionary<Type, TypeMapper> _documentTypeMappers = new Dictionary<Type, TypeMapper>();
 
@@ -190,7 +190,25 @@ namespace EasyDocumentStorage
 
 		}
 
-		/// <summary>
+        /// <summary>
+        /// Deletes all documents of type T
+        /// </summary>
+        /// <typeparam name="T">The document type parameter.</typeparam>
+	    public void Clear<T>()
+        {
+
+            var bucketId = GetBucketId<T>();
+
+            var blobs = _blobRepository.GetBlobs(bucketId).Result;
+
+            foreach (var blobId in blobs)
+            {
+                _blobRepository.DeleteBlob(bucketId, blobId).Wait();
+            }
+
+        }
+
+	    /// <summary>
 		/// Delete the specified documents.
 		/// </summary>
 		/// <param name="documents">Documents.</param>
@@ -284,6 +302,21 @@ namespace EasyDocumentStorage
 				throw new EZDocumentStorageException("A document id can not be null or empty.");
 
 			return md5id;
+
+		}
+
+		/// <summary>
+		/// Gets the document identifier by external string.
+		/// </summary>
+		/// <returns>The document identifier.</returns>
+		/// <typeparam name="T">The document type parameter.</typeparam>
+		public string GetDocumentIdByString<T>(string id)
+		{
+
+			if (string.IsNullOrEmpty(id))
+				throw new EZDocumentStorageException("A document id can not be null or empty.");
+
+			return id.ToMd5String();
 
 		}
 
@@ -453,7 +486,7 @@ namespace EasyDocumentStorage
 			using (var blobStream = _blobRepository.GetBlobStream(bucketId, documentId).Result)
 			{
 
-				Stream stream = blobStream;
+				var stream = blobStream;
 
 				if (EncryptionService != null)
 					stream = EncryptionService.Decrypt(blobStream);

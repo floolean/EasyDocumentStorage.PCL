@@ -13,7 +13,7 @@ namespace System
         /// <returns></returns>
         internal static string ToMd5String(this string text)
         {
-            return Encoding.UTF8.GetBytes(text).ToMd5String();
+           	return Encoding.UTF8.GetBytes(text).ToMd5String().Replace("-", string.Empty).ToLower();
         }
 
         /// <summary>

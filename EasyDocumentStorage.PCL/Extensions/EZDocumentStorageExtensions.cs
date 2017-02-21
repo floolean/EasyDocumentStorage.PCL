@@ -77,6 +77,15 @@ namespace EasyDocumentStorage
 			return Task.Run(() => eds.DeleteAll(documents));
 		}
 
+        /// <summary>
+        /// Async version of Clear
+        /// </summary>
+        /// <typeparam name="T">The document type parameter.</typeparam>
+        public static Task ClearAsync<T>(this IEZDocumentStorage eds)
+        {
+            return Task.Run(() => eds.Clear<T>());
+        }
+
 		/// <summary>
 		/// Async version of Exists
 		/// </summary>

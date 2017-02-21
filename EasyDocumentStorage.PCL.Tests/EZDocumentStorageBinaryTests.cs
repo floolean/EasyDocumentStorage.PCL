@@ -1,15 +1,18 @@
-﻿using NUnit.Framework;
+﻿using EasyDocumentStorage.Serialization;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace EasyDocumentStorage.PCL.Tests
 {
 	[TestFixture()]
-	public class EZDocumentStorageBinaryTests : EZDocumentStorageTestsJson
+	public class EZDocumentStorageBinaryTests : EZDocumentStorageBaseTests
 	{
 
+        protected static BinaryDocumentSerializer _binarySerializer = new BinaryDocumentSerializer();
+
 		[OneTimeSetUp]
-		public void Setup()
+		public void OneTimeSetup()
 		{
 			_eds.Serializer = _binarySerializer;
 		}
@@ -33,9 +36,9 @@ namespace EasyDocumentStorage.PCL.Tests
 
             var docId = _eds.GetDocumentId(doc);
 
-			Assert.IsTrue(EZDocumentStorage.Default.Insert(doc));
+			Assert.IsTrue(_eds.Insert(doc));
 
-			Assert.IsTrue(EZDocumentStorage.Default.Exists<ComplexDocument>(docId));
+			Assert.IsTrue(_eds.Exists<ComplexDocument>(docId));
 
 		}
 
@@ -58,9 +61,9 @@ namespace EasyDocumentStorage.PCL.Tests
 
             var docId = _eds.GetDocumentId(doc);
 
-			Assert.IsTrue(EZDocumentStorage.Default.Insert(doc));
+			Assert.IsTrue(_eds.Insert(doc));
 
-            Assert.IsTrue(EZDocumentStorage.Default.Exists<ComplexDocument>(docId));
+            Assert.IsTrue(_eds.Exists<ComplexDocument>(docId));
 
 			var document = _eds.Get<ComplexDocument>().FirstOrDefault();
 

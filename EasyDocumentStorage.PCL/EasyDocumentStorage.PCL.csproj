@@ -10,7 +10,7 @@
     <AssemblyName>EasyDocumentStorage.PCL</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
-    <ReleaseVersion>1.0.3</ReleaseVersion>
+    <ReleaseVersion>1.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

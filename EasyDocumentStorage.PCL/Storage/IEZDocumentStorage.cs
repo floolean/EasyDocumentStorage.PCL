@@ -95,6 +95,12 @@ namespace EasyDocumentStorage
 		/// <typeparam name="T">The document type parameter.</typeparam>
 		bool DeleteAll<T>(IEnumerable<T> documents);
 
+        /// <summary>
+        /// Deletes all documents of type T
+        /// </summary>
+        /// <typeparam name="T">The document type parameter.</typeparam>
+        void Clear<T>();
+
 		/// <summary>
 		/// Checks if the specified document exists
 		/// </summary>
@@ -125,6 +131,13 @@ namespace EasyDocumentStorage
 		/// <param name="document">Document.</param>
 		/// <typeparam name="T">The document type parameter.</typeparam>
 		string GetDocumentId<T>(T document);
+
+		/// <summary>
+		/// Gets the document identifier by external string.
+		/// </summary>
+		/// <returns>The document identifier.</returns>
+		/// <typeparam name="T">The document type parameter.</typeparam>
+		string GetDocumentIdByString<T>(string id);
 
 	}
 
