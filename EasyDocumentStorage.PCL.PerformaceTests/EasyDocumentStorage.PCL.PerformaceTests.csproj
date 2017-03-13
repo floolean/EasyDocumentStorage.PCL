@@ -8,7 +8,7 @@
     <RootNamespace>EasyDocumentStorage.PCL.PerformaceTests</RootNamespace>
     <AssemblyName>EasyDocumentStorage.PCL.PerformaceTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>1.0.3</ReleaseVersion>
+    <ReleaseVersion>1.0.5</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
